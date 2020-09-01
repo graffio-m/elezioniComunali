@@ -1,3 +1,7 @@
+/**
+ * Visualizzazione della mappa contenente i risultati elettorali
+ * invocato da scrutini_comunali.html
+ */
 var map = L.map('map').setView([46, 11,5], 8);
 map.zoomControl.setPosition('topright');
 var info = L.control({position: 'topleft'});
