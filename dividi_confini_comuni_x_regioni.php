@@ -24,7 +24,6 @@ $RegioniAR[18] = 'CALABRIA';
 $RegioniAR[19] = 'SICILIA';
 $RegioniAR[20] = 'SARDEGNA';
 
-//$filenameIn = 'dati/shapefile_comuni_italiani_corretto.json';
 $filenameIn = 'dati/confini_istat/comuni_WGS84.json';
 $file2writePath = 'dati/confini_ISTAT_per_regioni/';
 $file2writeExtension = '.json';
@@ -57,6 +56,7 @@ foreach ($confiniCommuni as $confiniCommuneSingolo) {
 	$codReg = $confiniCommuneSingolo->properties->COD_REG;
 	$jsonObjectNew[$codReg]->features[] = $confiniCommuneSingolo;
 }
+
 $totComuni = 0;
 for ($i=1; $i<21; $i++) {
 	//	header('Content-Type: application/json');
@@ -67,10 +67,12 @@ for ($i=1; $i<21; $i++) {
 	$fileOut = $file2writePath.$RegioniAR[$i].$file2writeExtension;
 	file_put_contents($fileOut, $dataJson);
 	echo '<br>Ho scritto: '.$fileOut . ' numero comuni: '. $numComuni;  //$dataJson;
-//		file_put_contents($fileJs2write, 'statesData = '.$dataJson);	
 }
+
 echo '<br>Totale comuni: '.$totComuni;  //$dataJson;
 die();
+
+
 /**
  * Versione che scrive quando cambia il COD_REG 
 foreach ($confiniCommuni as $confiniCommuneSingolo) {
