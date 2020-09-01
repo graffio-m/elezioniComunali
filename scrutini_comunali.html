@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Elezioni 2020 - elezioni comunali Veneto</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+	<link rel="stylesheet" href="mappa.css" />
+
+</head>
+<body onload="initMap();">
+<div id="pagecontainer">
+        <h1>Scrutini comunali Veneto</h1>
+        <!--
+        <div id="linkPluri"><a href="cameraUni.html">Vai a Collegi Uninominali</a> - <a href="collegi.html">Vai a mappa con Pluri e Uninominali</a></div>
+		-->
+		<div class="col4C">
+			<div class='boxPadding'>
+				<div id="map"></div>
+			</div>
+		</div>
+		<div class='colDx'>
+			<div class='boxPadding'>
+				<div id='titolo'>
+					<h4>Vai con il mouse sui comuni colorati</h4>
+				</div>
+				<div id='infoFuori'>
+					<table id="tabellaDati">
+
+					</table>
+				</div>
+			</div>
+		</div>
+	<script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+	<script type="text/javascript" src="scrutini_comunali.js"></script>
+</div>	
+</body>
+</html>
+
+
+
