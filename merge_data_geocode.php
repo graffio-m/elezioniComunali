@@ -10,6 +10,9 @@
  * @version		   0.1
  * @abstract	   Fonde il file dei risultati provenienti da Ministero Interno con il file
  * 				   dei confini (in geojson) della regione corrispondente
+ * 
+ * 				   legge da una directory i dati dello scrutinio
+ *
  */
 
 
