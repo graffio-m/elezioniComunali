@@ -1,4 +1,17 @@
 <?php
+/**
+ * token.php
+ *
+ * @package        Elezioni 2020
+ * @author         Maurizio Mazzoneschi <mazzoneschi@lynxlab.com>         
+ * @copyright      Copyright (c) 2020, Maurizio Mazzoneschi
+ * @license        https://www.gnu.org/licenses/gpl-3.0.en.html GNU Public License v.3
+ * @link           
+ * @version		   0.1
+ * @abstract	   Fonde il file dei risultati provenienti da Ministero Interno con il file
+ * 				   dei confini (in geojson) della regione corrispondente
+ */
+
 
 if (isset($_GET['reg']) && ($_GET['reg'] != null)) {
     $reg = $_GET['reg'];
@@ -100,84 +113,6 @@ file_put_contents($file2write, $dataJson);
 //file_put_contents($fileJs2write, 'statesData = '.$dataJson);
 
 die();
-
-/**
- * FINE
- */
-
-/*
-switch (json_last_error()) {
-	case JSON_ERROR_NONE:
-		echo ' - No errors';
-		break;
-	case JSON_ERROR_DEPTH:
-		echo ' - Maximum stack depth exceeded';
-		break;
-	case JSON_ERROR_STATE_MISMATCH:
-		echo ' - Underflow or the modes mismatch';
-		break;
-	case JSON_ERROR_CTRL_CHAR:
-		echo ' - Unexpected control character found';
-		break;
-	case JSON_ERROR_SYNTAX:
-		echo ' - Syntax error, malformed JSON';
-		break;
-	case JSON_ERROR_UTF8:
-		echo ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-		break;
-	default:
-		echo ' - Unknown error';
-		break;
-}
-*/
-$dataAr = array_map('str_getcsv', file($filenameIn));
-$header = array_shift($dataAr);
-
-foreach ($dataAr as $stato) {
-		$dataHA[] = array_combine($header, $stato);
-}
-//loop through jsonObject
-foreach($jsonObject->features as $key => $feature) {
-//	var_dump($feature);
-	//check if there is data for this feature
-	foreach ($dataHA as $stato) {
-//		if ($feature->properties->su_a3 == $stato['su_a3']) {
-//		if ($feature->properties->iso_a3 == $stato['iso_a3'] || $feature->properties->adm0_a3_us ==  $stato['iso_a3']) {
-		if ($feature->properties->ISO_A3 == $stato['iso_a3']) {
-			$feature->proprieta = new stdClass();
-			$feature->proprieta->type = 'properties';
-				foreach ($stato as $key => $valore) {
-					$key=trim($key);
-					$valore = trim($valore);
-					$feature->proprieta->$key = $valore;
-			}
-/*
-			$feature->properties->governo_statale = $stato['governo_statale'];
-			$feature->properties->forma_governo = $stato['forma_governo'];
-			$feature->proprieta->forma_governo = $stato['forma_governo'];
-			$feature->proprieta->stato = $stato['stato'];
-			$feature->proprieta->iso_a3 = $stato['iso_a3'];
-//			print_r($feature->proprieta->iso_a3);
- * 
- */
-			$jsonObjectNew->features[] = $feature;
-			$count++;
-			}
-	}
-	unset($feature->properties);
-	$jsonObject->features[$key] = $feature;
-	}
-	$jsonObjectNew->count = $count;
-	
-
-//encode and output jsonObject
-header('Content-Type: application/json');
-$dataJson = json_encode($jsonObjectNew); // file contenente solo gli stati che hanno proprietà forma di governo
-// $dataJson = json_encode($jsonObject); // file completo con aggiunta delle proprietà
-echo $dataJson;
-file_put_contents($file2write, $dataJson);
-file_put_contents($fileJs2write, 'statesData = '.$dataJson);
-
 
 /*
  * ****************************
